@@ -1,7 +1,7 @@
 "use strict";
 
-var _require = require('node:process'),
-    send = _require.send;
+// var _require = require('node:process'),
+//     send = _require.send;
 
 var handleMessage = function handleMessage(e) {
   e.preventDefault(); // $('#domoMessage').animate({ window: 'hide' }, 350);
