@@ -1,5 +1,6 @@
 "use strict";
 
+<<<<<<< HEAD
 // const { send } = require('node:process');
 // everything is sent and displays properly
 // i things to do
@@ -8,6 +9,11 @@
 // - make the username display when message is sent *
 // - make sure no bad words
 //pass in username thru a hidden form?
+=======
+// var _require = require('node:process'),
+//     send = _require.send;
+
+>>>>>>> 32a58ca1c0600b3cbd927134a17fbfd89420e810
 var handleMessage = function handleMessage(e) {
   e.preventDefault();
 
