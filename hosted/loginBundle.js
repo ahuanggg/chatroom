@@ -10,9 +10,12 @@ var handleLogin = function handleLogin(e) {
   if ($('#user').val() == '' || $('#pass').val() == '') {
     handleError('Username or password is empty');
     return false;
-  }
+  } // console.log($('input[name=_csrf]').val());
+  // console.log($('#user').val());
 
-  console.log($('input[name=_csrf]').val());
+
+  var username = $('#user').val();
+  localStorage.setItem('username', username);
   sendAjax('POST', $('#loginForm').attr('action'), $('#loginForm').serialize(), redirect);
   return false;
 };
@@ -38,78 +41,76 @@ var handleSignup = function handleSignup(e) {
 };
 
 var LoginWindow = function LoginWindow(props) {
-  return (/*#__PURE__*/React.createElement("form", {
-      id: "loginForm",
-      name: "loginForm",
-      onSubmit: handleLogin,
-      action: "/login",
-      method: "POST",
-      className: "mainForm"
-    }, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "username"
-    }, "Username:"), /*#__PURE__*/React.createElement("input", {
-      id: "user",
-      type: "text",
-      name: "username",
-      placeholder: "username"
-    }), /*#__PURE__*/React.createElement("label", {
-      htmlFor: "pass"
-    }, "Password: "), /*#__PURE__*/React.createElement("input", {
-      id: "pass",
-      type: "password",
-      name: "pass",
-      placeholder: "password"
-    }), /*#__PURE__*/React.createElement("input", {
-      type: "hidden",
-      name: "_csrf",
-      value: props.csrf
-    }), /*#__PURE__*/React.createElement("input", {
-      className: "formSubmit",
-      type: "submit",
-      value: "Sign in"
-    }))
-  );
+  return /*#__PURE__*/React.createElement("form", {
+    id: "loginForm",
+    name: "loginForm",
+    onSubmit: handleLogin,
+    action: "/login",
+    method: "POST",
+    className: "mainForm"
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "username"
+  }, "Username:"), /*#__PURE__*/React.createElement("input", {
+    id: "user",
+    type: "text",
+    name: "username",
+    placeholder: "username"
+  }), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "pass"
+  }, "Password: "), /*#__PURE__*/React.createElement("input", {
+    id: "pass",
+    type: "password",
+    name: "pass",
+    placeholder: "password"
+  }), /*#__PURE__*/React.createElement("input", {
+    type: "hidden",
+    name: "_csrf",
+    value: props.csrf
+  }), /*#__PURE__*/React.createElement("input", {
+    className: "formSubmit",
+    type: "submit",
+    value: "Sign in"
+  }));
 };
 
 var SignupWindow = function SignupWindow(props) {
-  return (/*#__PURE__*/React.createElement("form", {
-      id: "signupForm",
-      name: "signupForm",
-      onSubmit: handleSignup,
-      action: "/signup",
-      method: "POST",
-      className: "mainForm"
-    }, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "username"
-    }, "Username:"), /*#__PURE__*/React.createElement("input", {
-      id: "user",
-      type: "text",
-      name: "username",
-      placeholder: "username"
-    }), /*#__PURE__*/React.createElement("label", {
-      htmlFor: "pass"
-    }, "Password: "), /*#__PURE__*/React.createElement("input", {
-      id: "pass",
-      type: "password",
-      name: "pass",
-      placeholder: "password"
-    }), /*#__PURE__*/React.createElement("label", {
-      htmlFor: "pass2"
-    }, "Password: "), /*#__PURE__*/React.createElement("input", {
-      id: "pass2",
-      type: "password",
-      name: "pass2",
-      placeholder: "retype password"
-    }), /*#__PURE__*/React.createElement("input", {
-      type: "hidden",
-      name: "_csrf",
-      value: props.csrf
-    }), /*#__PURE__*/React.createElement("input", {
-      className: "formSubmit",
-      type: "submit",
-      value: "Sign Up"
-    }))
-  );
+  return /*#__PURE__*/React.createElement("form", {
+    id: "signupForm",
+    name: "signupForm",
+    onSubmit: handleSignup,
+    action: "/signup",
+    method: "POST",
+    className: "mainForm"
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "username"
+  }, "Username:"), /*#__PURE__*/React.createElement("input", {
+    id: "user",
+    type: "text",
+    name: "username",
+    placeholder: "username"
+  }), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "pass"
+  }, "Password: "), /*#__PURE__*/React.createElement("input", {
+    id: "pass",
+    type: "password",
+    name: "pass",
+    placeholder: "password"
+  }), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "pass2"
+  }, "Password: "), /*#__PURE__*/React.createElement("input", {
+    id: "pass2",
+    type: "password",
+    name: "pass2",
+    placeholder: "retype password"
+  }), /*#__PURE__*/React.createElement("input", {
+    type: "hidden",
+    name: "_csrf",
+    value: props.csrf
+  }), /*#__PURE__*/React.createElement("input", {
+    className: "formSubmit",
+    type: "submit",
+    value: "Sign Up"
+  }));
 };
 
 var createLoginWindow = function createLoginWindow(csrf) {
@@ -175,4 +176,19 @@ var sendAjax = function sendAjax(type, action, data, success) {
       handleError(messageObj.error);
     }
   });
-};
+}; // const sendPOSTAjax = (type, action, data, success) => {
+// 	console.log('sendPOSTAJAX not wokring');
+// 	$.ajax({
+// 		cache: false,
+// 		type: type,
+// 		url: action,
+// 		data: data,
+// 		dataType: 'json',
+// 		success: success,
+// 		error: function (xhr, status, error) {
+// 			var messageObj = JSON.parse(xhr.responseText);
+// 			console.log(messageObj.error);
+// 			handleError(messageObj.error);
+// 		},
+// 	});
+// };

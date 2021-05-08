@@ -1,9 +1,16 @@
-const { send } = require('node:process');
+// const { send } = require('node:process');
+
+// everything is sent and displays properly
+// i things to do
+// - make it look better ***
+// - make a password change ***
+// - make the username display when message is sent *
+// - make sure no bad words
+
+//pass in username thru a hidden form?
 
 const handleMessage = (e) => {
 	e.preventDefault();
-
-	// $('#domoMessage').animate({ window: 'hide' }, 350);
 
 	if ($('#message').val() == '') {
 		console.log('error');
@@ -11,11 +18,16 @@ const handleMessage = (e) => {
 		return false;
 	}
 
-	console.log('inside handle message');
+	console.log($('#messageBox').serialize());
+	const csrf = document.querySelector("input[name='_csrf']").value;
+	const message = document.querySelector('#message').value;
+	const owner = localStorage.getItem('username');
+	const body = `_csrf=${csrf}&message=${message}&owner=${owner}`;
+	console.log(body);
 
-	sendAjax('POST', $('#messageBox').attr('action'), $('#messageBox').serialize(), function () {
+	sendAjax('POST', '/chat', body, function () {
 		// console.log('sendmessage()');
-		sendMessage();
+		loadMessage();
 	});
 
 	return false;
@@ -32,28 +44,49 @@ const MessageBox = (props) => {
 	);
 };
 
-const ChatBox = (props) => {
-	return <textarea type='text' id='chatTextArea' placeholder='This is where the messages will be displayed'></textarea>;
+const ChatBox = function (props) {
+	// console.log(props);
+	if (props.messages.length === 0) {
+		return (
+			<div className='messageList'>
+				<h3 className='emptyChat'>No messages yet</h3>
+			</div>
+		);
+	}
+
+	const messageNodes = props.messages.map(function (message) {
+		// console.log(message);
+		return (
+			<div key={message._id} className='messages'>
+				<text className='actualMessage'>
+					{message.owner}: {message.message}
+				</text>
+			</div>
+		);
+	});
+
+	return <div className='messageList'>{messageNodes}</div>;
 };
 
 const setup = function (csrf) {
-	ReactDOM.render(<ChatBox />, document.querySelector('#chat'));
+	ReactDOM.render(<ChatBox messages={[]} />, document.querySelector('#chat'));
 	ReactDOM.render(<MessageBox csrf={csrf} />, document.querySelector('#messageBox'));
 
-	// loadMessageFromServer();
+	loadMessage();
 };
 
-// function to send message
-const sendMessage = function () {
-	console.log('sendmesage()');
+// function to get back all messages
+const loadMessage = function () {
+	// console.log('sendmesage()');
 	sendAjax('GET', '/getMessages', null, (data) => {
 		console.log('successful');
+		//data is all the messages from the database from the same person
+		// console.log(data.messages[0]._id);
+		// console.log(data.messages.length);
+
 		ReactDOM.render(<ChatBox messages={data.messages} />, document.querySelector('#chat'));
 	});
 };
-
-// function to load previous messages
-const loadMessageFromServer = function () {};
 
 const getToken = () => {
 	sendAjax('GET', '/getToken', null, (result) => {

@@ -16,7 +16,8 @@
     "nodemon": "nodemon --watch ./server ./server/app.js",
     "start": "node ./server/app.js",
     "pretest": "eslint ./server --fix",
-    "test": "echo \"Tests complete\""
+    "test": "echo \"Tests complete\"",
+    "dev": "concurrently \"npm run nodemon \" \"npm run watchAppBundle\" \"npm run watchLoginBundle\""
   },
   "keywords": [
     "Node",
@@ -38,6 +39,7 @@
   },
   "dependencies": {
     "@babel/compat-data": "^7.13.12",
+    "ajax": "^0.0.4",
     "body-parser": "^1.19.0",
     "caniuse-lite": "^1.0.30001219",
     "compression": "^1.7.4",
@@ -48,6 +50,7 @@
     "express-handlebars": "^3.1.0",
     "express-session": "^1.17.0",
     "helmet": "^3.21.3",
+    "jquery": "^3.6.0",
     "mongoose": "^5.12.3",
     "redis": "^3.0.2",
     "serve-favicon": "^2.5.0",

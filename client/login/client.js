@@ -10,7 +10,10 @@ const handleLogin = (e) => {
 		return false;
 	}
 
-	console.log($('input[name=_csrf]').val());
+	// console.log($('input[name=_csrf]').val());
+	// console.log($('#user').val());
+	var username = $('#user').val();
+	localStorage.setItem('username', username);
 
 	sendAjax('POST', $('#loginForm').attr('action'), $('#loginForm').serialize(), redirect);
 
