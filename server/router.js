@@ -10,6 +10,9 @@ const router = (app) => {
 	app.get('/logout', mid.requiresLogin, controllers.Account.logout);
 	app.get('/chat', mid.requiresLogin, controllers.Chat.chatPage);
 	app.post('/chat', mid.requiresLogin, controllers.Chat.sendMessage);
+	app.get('/settings', mid.requiresLogin, controllers.Account.settingsPage);
+	app.post('/password', mid.requiresLogin, controllers.Account.changePassword);
+	// app.post('/username', mid.requiresLogin, controllers.Account.changeUser);
 	// app.post('/chat', controllers.Chat.sendMessage);
 	app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 };

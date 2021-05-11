@@ -54,6 +54,8 @@
     "mongoose": "^5.12.3",
     "redis": "^3.0.2",
     "serve-favicon": "^2.5.0",
+    "socket.io": "^4.0.2",
+    "socket.io-client": "^4.0.2",
     "talkjs": "^0.14.3",
     "underscore": "^1.9.2"
   }

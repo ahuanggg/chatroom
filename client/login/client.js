@@ -3,9 +3,8 @@
 const handleLogin = (e) => {
 	e.preventDefault();
 
-	$('#errorMessage').animate({ width: 'hide' }, 350);
-
 	if ($('#user').val() == '' || $('#pass').val() == '') {
+		$('#errorMessage').css('display', 'inline');
 		handleError('Username or password is empty');
 		return false;
 	}
@@ -22,8 +21,6 @@ const handleLogin = (e) => {
 
 const handleSignup = (e) => {
 	e.preventDefault();
-
-	$('#domoMessage').animate({ width: 'hide' }, 350);
 
 	if ($('#user').val() == '' || $('#pass').val() == '' || $('#pass2').val() == '') {
 		handleError('All fields are required');
@@ -42,14 +39,30 @@ const handleSignup = (e) => {
 
 const LoginWindow = (props) => {
 	return (
-		<form id='loginForm' name='loginForm' onSubmit={handleLogin} action='/login' method='POST' className='mainForm'>
-			<label htmlFor='username'>Username:</label>
-			<input id='user' type='text' name='username' placeholder='username' />
-			<label htmlFor='pass'>Password: </label>
-			<input id='pass' type='password' name='pass' placeholder='password' />
-			<input type='hidden' name='_csrf' value={props.csrf} />
-			<input className='formSubmit' type='submit' value='Sign in' />
-		</form>
+		<div className='container is-fluid'>
+			<form id='loginForm' name='loginForm' onSubmit={handleLogin} action='/login' method='POST' className='form mainForm'>
+				<div className='field'>
+					<label className='label' htmlFor='username'>
+						Username:
+					</label>
+					<div className='control'>
+						<input className='input' id='user' type='text' name='username' placeholder='username' />
+					</div>
+				</div>
+				<div className='field'>
+					<label className='label' htmlFor='pass'>
+						Password:
+					</label>
+					<div className='control'>
+						<input className='input' id='pass' type='password' name='pass' placeholder='password' />
+					</div>
+					<input type='hidden' name='_csrf' value={props.csrf} />
+				</div>
+				<div className='field is-dark is-rounded'>
+					<input className='button formSubmit' type='submit' value='Sign in' />
+				</div>
+			</form>
+		</div>
 	);
 };
 

@@ -3,11 +3,9 @@
 // const { signup } = require('../../server/controllers/Account');
 var handleLogin = function handleLogin(e) {
   e.preventDefault();
-  $('#errorMessage').animate({
-    width: 'hide'
-  }, 350);
 
   if ($('#user').val() == '' || $('#pass').val() == '') {
+    $('#errorMessage').css('display', 'inline');
     handleError('Username or password is empty');
     return false;
   } // console.log($('input[name=_csrf]').val());
@@ -22,9 +20,6 @@ var handleLogin = function handleLogin(e) {
 
 var handleSignup = function handleSignup(e) {
   e.preventDefault();
-  $('#domoMessage').animate({
-    width: 'hide'
-  }, 350);
 
   if ($('#user').val() == '' || $('#pass').val() == '' || $('#pass2').val() == '') {
     handleError('All fields are required');
@@ -41,36 +36,52 @@ var handleSignup = function handleSignup(e) {
 };
 
 var LoginWindow = function LoginWindow(props) {
-  return /*#__PURE__*/React.createElement("form", {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "container is-fluid"
+  }, /*#__PURE__*/React.createElement("form", {
     id: "loginForm",
     name: "loginForm",
     onSubmit: handleLogin,
     action: "/login",
     method: "POST",
-    className: "mainForm"
+    className: "form mainForm"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "field"
   }, /*#__PURE__*/React.createElement("label", {
+    className: "label",
     htmlFor: "username"
-  }, "Username:"), /*#__PURE__*/React.createElement("input", {
+  }, "Username:"), /*#__PURE__*/React.createElement("div", {
+    className: "control"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "input",
     id: "user",
     type: "text",
     name: "username",
     placeholder: "username"
-  }), /*#__PURE__*/React.createElement("label", {
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "field"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "label",
     htmlFor: "pass"
-  }, "Password: "), /*#__PURE__*/React.createElement("input", {
+  }, "Password:"), /*#__PURE__*/React.createElement("div", {
+    className: "control"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "input",
     id: "pass",
     type: "password",
     name: "pass",
     placeholder: "password"
-  }), /*#__PURE__*/React.createElement("input", {
+  })), /*#__PURE__*/React.createElement("input", {
     type: "hidden",
     name: "_csrf",
     value: props.csrf
-  }), /*#__PURE__*/React.createElement("input", {
-    className: "formSubmit",
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "field is-dark is-rounded"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "button formSubmit",
     type: "submit",
     value: "Sign in"
-  }));
+  }))));
 };
 
 var SignupWindow = function SignupWindow(props) {
@@ -154,6 +165,7 @@ $(document).ready(function () {
 
 var handleError = function handleError(message) {
   console.log(message);
+  $('article').css('display', 'block');
   $('#errorMessage').text(message);
 };
 
@@ -162,7 +174,7 @@ var redirect = function redirect(response) {
 };
 
 var sendAjax = function sendAjax(type, action, data, success) {
-  console.log('sendAJAX not wokring');
+  // console.log('sendAJAX not wokring');
   $.ajax({
     cache: false,
     type: type,

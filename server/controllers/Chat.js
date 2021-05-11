@@ -11,7 +11,7 @@ const sendMessage = (req, res) => {
 	}
 
 	// console.log('inside send message');
-	console.log(req.body);
+	// console.log(req.body);
 
 	const messageData = {
 		message: req.body.message,

@@ -1,5 +1,6 @@
 const handleError = (message) => {
 	console.log(message);
+	$('article').css('display', 'block');
 	$('#errorMessage').text(message);
 };
 
@@ -8,7 +9,7 @@ const redirect = (response) => {
 };
 
 const sendAjax = (type, action, data, success) => {
-	console.log('sendAJAX not wokring');
+	// console.log('sendAJAX not wokring');
 	$.ajax({
 		cache: false,
 		type: type,
