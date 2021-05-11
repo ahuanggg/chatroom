@@ -5,8 +5,14 @@ var handleLogin = function handleLogin(e) {
   e.preventDefault();
 
   if ($('#user').val() == '' || $('#pass').val() == '') {
-    $('#errorMessage').css('display', 'inline');
-    handleError('Username or password is empty');
+    // $('#errorMessage').css('display', 'inline');
+    // handleError('Username or password is empty');
+    $('#user').attr('placeholder', 'Username cannot be empty! ೕ(Ò⺫ Ó )೨ ');
+    $('#pass').attr('placeholder', 'Password cannot be empty! ೕ(Ò⺫ Ó )೨ ');
+    $('#user').addClass('is-danger');
+    $('#pass').addClass('is-danger');
+    $('#user').val('');
+    $('#pass').val('');
     return false;
   } // console.log($('input[name=_csrf]').val());
   // console.log($('#user').val());
@@ -22,15 +28,32 @@ var handleSignup = function handleSignup(e) {
   e.preventDefault();
 
   if ($('#user').val() == '' || $('#pass').val() == '' || $('#pass2').val() == '') {
-    handleError('All fields are required');
+    // handleError('All fields are required');
+    $('#user').attr('placeholder', 'Username cannot be empty! ೕ(Ò⺫ Ó )೨ ');
+    $('#pass').attr('placeholder', 'Password cannot be empty! ೕ(Ò⺫ Ó )೨ ');
+    $('#pass2').attr('placeholder', 'Password cannot be empty! ೕ(Ò⺫ Ó )೨ ');
+    $('#user').addClass('is-danger');
+    $('#pass').addClass('is-danger');
+    $('#pass2').addClass('is-danger');
+    $('#user').val('');
+    $('#pass').val('');
+    $('#pass2').val('');
     return false;
   }
 
   if ($('#pass').val() !== $('#pass2').val()) {
-    handleError('Passwords do not match');
+    // handleError('Passwords do not match');
+    $('#pass').attr('placeholder', 'Passwords do not match! ೕ(Ò⺫ Ó )೨ ');
+    $('#pass2').attr('placeholder', 'Passwords do not match! ೕ(Ò⺫ Ó )೨ ');
+    $('#pass').addClass('is-danger');
+    $('#pass2').addClass('is-danger');
+    $('#pass').val('');
+    $('#pass2').val('');
     return false;
   }
 
+  var username = $('#user').val();
+  localStorage.setItem('username', username);
   sendAjax('POST', $('#signupForm').attr('action'), $('#signupForm').serialize(), redirect);
   return false;
 };
@@ -100,7 +123,7 @@ var SignupWindow = function SignupWindow(props) {
     className: "label",
     htmlFor: "username"
   }, "Username:"), /*#__PURE__*/React.createElement("div", {
-    clasName: "control"
+    className: "control"
   }, /*#__PURE__*/React.createElement("input", {
     className: "input",
     id: "user",

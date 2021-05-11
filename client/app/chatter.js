@@ -146,11 +146,6 @@ const setup = function (csrf) {
 
 	// $('#chat').scrollTop($('#chat')[0].scrollHeight);
 	$('#chat').scrollTop($('#chat')[0].scrollHeight - $('#chat')[0].clientHeight);
-
-	setInterval(function () {
-		console.log('doing it');
-		loadMessage();
-	}, 10000);
 };
 
 // function to get back all messages
@@ -166,6 +161,10 @@ const loadMessage = function () {
 	});
 	// ws.send('test');
 	// return false;
+	setInterval(function () {
+		console.log('doing it');
+		loadMessage();
+	}, 30000);
 };
 
 const handlePassword = (e) => {
@@ -173,13 +172,29 @@ const handlePassword = (e) => {
 
 	if ($('#changepass').val() == '' || $('#changepass2').val() == '') {
 		console.log('error');
-		handleError('passwords fields cannot empty');
+		// handleError('passwords fields cannot empty');
+		$('#changepass').attr('placeholder', 'Password cannot be empty! ೕ(Ò⺫ Ó )೨ ');
+		$('#changepass2').attr('placeholder', 'Password cannot be empty! ೕ(Ò⺫ Ó )೨ ');
+
+		$('#changepass').addClass('is-danger');
+		$('#changepass2').addClass('is-danger');
+
+		$('#changepass').val('');
+		$('#changepass2').val('');
 		return false;
 	}
 
 	if ($('#changepass').val() != $('#changepass2').val()) {
 		console.log('error');
-		handleError('passwords do not match');
+		// handleError('passwords do not match');
+		$('#changepass').attr('placeholder', 'Passwords do not match! ೕ(Ò⺫ Ó )೨ ');
+		$('#changepass2').attr('placeholder', 'Password do not match! ೕ(Ò⺫ Ó )೨ ');
+
+		$('#changepass').addClass('is-danger');
+		$('#changepass2').addClass('is-danger');
+
+		$('#changepass').val('');
+		$('#changepass2').val('');
 		return false;
 	}
 
