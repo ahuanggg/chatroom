@@ -15,20 +15,70 @@
 </head>
 
 <body>
-  <nav class='navbar' role="navigation" aria-label="main navigation">
-    <div class="navlink navbar-item"><a href="/logout">Log out</a></div>
-    <div class="navlink navbar-item" id='chatButton'><a href="/chat">Chat</a></div>
-    <div class="navlink navbar-item" id='settingsButton'><a href="/settings">Settings</a></div>
+  <nav class='navbar is-transparent is-block pb-5' role="navigation">
+    <div class="navbar-menu is-active">
+      <div class="navbar-start">
+
+        <a class="navbar-item" href="/logout">
+          <span class="icon">
+            <i class="fas fa-sign-out-alt"></i>
+          </span>
+          <span>Log out</span>
+        </a>
+        <a class="navbar-item" id="chatButton" href="/chat">
+          <span class="icon">
+            <i class="fas fa-comments"></i>
+          </span>
+          <span>Chat Room</span>
+        </a>
+        <a class="navbar-item" id="settingsButton" href="/settings">
+          <span class="icon">
+
+            <i class="fas fa-user-cog"></i>
+          </span>
+          <span>Settings</span>
+        </a>
+
+
+
+
+      </div>
   </nav>
-  <section id='chat'>
-    this is where the chat will go
-  </section>
-  <section id='messageBox'>
-    this is where the message will go
-  </section>
-  <section id='errorMessage'>
-    this is where errors will be
-  </section>
+
+  {{!-- <div class="container is-fluid pb-6">
+    <section id='chat'>
+      this is where the chat will go
+    </section>
+  </div> --}}
+
+  <div class="container is-fluid pb-6" id='chat-css'>
+    <section class="hero is-medium is-clipped" id='chat'>
+      <div class="hero-body">
+        <p class="subtitle">
+
+        </p>
+      </div>
+    </section>
+  </div>
+
+
+  <div class="container is-fluid pb-6">
+    <section id='messageBox'>
+      this is where the message will go
+    </section>
+  </div>
+
+
+
+
+  <article class="message is-small is-danger " id='article-errorMessage'>
+    <div class="message-header">
+      <p>Error Message</p>
+    </div>
+    <div class="message-body">
+      <p id="errorMessage">test</p>
+    </div>
+  </article>
 
 
   <script src="/assets/bundle.js"></script>

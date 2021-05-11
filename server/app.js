@@ -17,34 +17,34 @@ const port = process.env.PORT || process.env.NODE_PORT || 4000;
 const dbURL = 'mongodb+srv://ahuanggg:Andyxie130@cluster0.styc6.mongodb.net/ChatRoom?authSource=admin&replicaSet=atlas-143hk9-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true';
 
 const mongooseOptions = {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-	useCreateIndex: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
 };
 
 mongoose.connect(dbURL, mongooseOptions, (err) => {
-	if (err) {
-		console.log('Could not connect to database');
-		throw err;
-	}
+  if (err) {
+    console.log('Could not connect to database');
+    throw err;
+  }
 });
 
 let redisURL = {
-	hostname: 'redis-18952.c257.us-east-1-3.ec2.cloud.redislabs.com',
-	port: 18952,
+  hostname: 'redis-18952.c257.us-east-1-3.ec2.cloud.redislabs.com',
+  port: 18952,
 };
 
 let redisPASS = 'SbOIGnu4Xfoxj36YrjjoomgKNiUbsO0A';
 
 if (process.env.REDISCLOUD_URL) {
-	redisURL = url.parse(process.env.REDISCLOUD_URL);
-	[, redisPASS] = redisURL.auth.split(':');
+  redisURL = url.parse(process.env.REDISCLOUD_URL);
+  [, redisPASS] = redisURL.auth.split(':');
 }
 
 const redisClient = redis.createClient({
-	host: redisURL.hostname,
-	port: redisURL.port,
-	password: redisPASS,
+  host: redisURL.hostname,
+  port: redisURL.port,
+  password: redisPASS,
 });
 
 const router = require('./router.js');
@@ -56,24 +56,24 @@ app.use(compression());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(
-	session({
-		key: 'sessionid',
-		store: new RedisStore({
-			client: redisClient,
-		}),
-		secret: 'chatroom1',
-		resave: true,
-		saveUninitialized: true,
-		cookie: {
-			httpOnly: true,
-		},
-	})
+  session({
+    key: 'sessionid',
+    store: new RedisStore({
+      client: redisClient,
+    }),
+    secret: 'chatroom1',
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+      httpOnly: true,
+    },
+  }),
 );
 app.engine(
-	'handlebars',
-	expressHandlebars({
-		defaultLayout: 'main',
-	})
+  'handlebars',
+  expressHandlebars({
+    defaultLayout: 'main',
+  }),
 );
 app.set('view engine', 'handlebars');
 app.set('views', `${__dirname}/../views`);
@@ -83,25 +83,26 @@ app.use(cookieParser());
 
 app.use(csrf());
 app.use((err, req, res, next) => {
-	if (err.code !== 'EBADCSRFTOKEN') return next(err);
+  if (err.code !== 'EBADCSRFTOKEN') return next(err);
 
-	// console.log('Missing CSRF token');
-	return false;
+  // console.log('Missing CSRF token');
+  return false;
 });
 
 router(app);
 
-const WebSocketServer = require('ws').Server;
-const wss = new WebSocketServer({ port: 2221 });
+// const WebSocketServer = require('ws').Server;
 
-wss.on('connection', (ws) => {
-	console.info('connection started');
-	ws.send('yo started');
-});
+// const wss = new WebSocketServer({ port: 2221 });
+
+// wss.on('connection', (ws) => {
+//   console.info('connection started');
+//   ws.send('yo started');
+// });
 
 app.listen(port, (err) => {
-	if (err) {
-		throw err;
-	}
-	console.log(`Listening on port ${port}`);
+  if (err) {
+    throw err;
+  }
+  console.log(`Listening on port ${port}`);
 });

@@ -57,7 +57,7 @@ var LoginWindow = function LoginWindow(props) {
     id: "user",
     type: "text",
     name: "username",
-    placeholder: "username"
+    placeholder: "type in your username! ( \u141B )\u0648"
   }))), /*#__PURE__*/React.createElement("div", {
     className: "field"
   }, /*#__PURE__*/React.createElement("label", {
@@ -70,58 +70,80 @@ var LoginWindow = function LoginWindow(props) {
     id: "pass",
     type: "password",
     name: "pass",
-    placeholder: "password"
+    placeholder: "shhh make sure no one is looking (\u2283\u203F\u2282)"
   })), /*#__PURE__*/React.createElement("input", {
     type: "hidden",
     name: "_csrf",
     value: props.csrf
   })), /*#__PURE__*/React.createElement("div", {
-    className: "field is-dark is-rounded"
+    className: "field"
   }, /*#__PURE__*/React.createElement("input", {
-    className: "button formSubmit",
+    className: "button is-dark is-rounded is-pulled-right formSubmit",
     type: "submit",
     value: "Sign in"
   }))));
 };
 
 var SignupWindow = function SignupWindow(props) {
-  return /*#__PURE__*/React.createElement("form", {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "container is-fluid"
+  }, /*#__PURE__*/React.createElement("form", {
     id: "signupForm",
     name: "signupForm",
     onSubmit: handleSignup,
     action: "/signup",
     method: "POST",
-    className: "mainForm"
+    className: "form mainForm"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "field"
   }, /*#__PURE__*/React.createElement("label", {
+    className: "label",
     htmlFor: "username"
-  }, "Username:"), /*#__PURE__*/React.createElement("input", {
+  }, "Username:"), /*#__PURE__*/React.createElement("div", {
+    clasName: "control"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "input",
     id: "user",
     type: "text",
     name: "username",
-    placeholder: "username"
-  }), /*#__PURE__*/React.createElement("label", {
+    placeholder: "has to be unique! ( \u141B )\u0648"
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "field"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "label",
     htmlFor: "pass"
-  }, "Password: "), /*#__PURE__*/React.createElement("input", {
+  }, "New password:"), /*#__PURE__*/React.createElement("div", {
+    className: "control"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "input",
     id: "pass",
     type: "password",
     name: "pass",
-    placeholder: "password"
-  }), /*#__PURE__*/React.createElement("label", {
+    placeholder: "something secretive (\u2299\u2026\u2299 )"
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "field"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "label",
     htmlFor: "pass2"
-  }, "Password: "), /*#__PURE__*/React.createElement("input", {
+  }, "Retype your password:"), /*#__PURE__*/React.createElement("div", {
+    className: "control"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "input",
     id: "pass2",
     type: "password",
     name: "pass2",
-    placeholder: "retype password"
-  }), /*#__PURE__*/React.createElement("input", {
+    placeholder: "type it again (\u2299\u2026\u2299 )"
+  })), /*#__PURE__*/React.createElement("input", {
     type: "hidden",
     name: "_csrf",
     value: props.csrf
-  }), /*#__PURE__*/React.createElement("input", {
-    className: "formSubmit",
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "field"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "button is-dark is-rounded formSubmit is-pulled-right",
     type: "submit",
     value: "Sign Up"
-  }));
+  }))));
 };
 
 var createLoginWindow = function createLoginWindow(csrf) {

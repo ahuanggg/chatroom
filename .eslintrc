@@ -3,6 +3,8 @@
   "rules": {
     "no-underscore-dangle" : "off",
     "no-plusplus": "off",
-    "no-undef": 1
+    "no-undef": 1,
+    "no-unused-vars": 1,
+    "max-len": 1
   }
 }

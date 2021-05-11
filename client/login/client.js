@@ -46,7 +46,7 @@ const LoginWindow = (props) => {
 						Username:
 					</label>
 					<div className='control'>
-						<input className='input' id='user' type='text' name='username' placeholder='username' />
+						<input className='input' id='user' type='text' name='username' placeholder='type in your username! ( ᐛ )و' />
 					</div>
 				</div>
 				<div className='field'>
@@ -54,12 +54,12 @@ const LoginWindow = (props) => {
 						Password:
 					</label>
 					<div className='control'>
-						<input className='input' id='pass' type='password' name='pass' placeholder='password' />
+						<input className='input' id='pass' type='password' name='pass' placeholder='shhh make sure no one is looking (⊃‿⊂)' />
 					</div>
 					<input type='hidden' name='_csrf' value={props.csrf} />
 				</div>
-				<div className='field is-dark is-rounded'>
-					<input className='button formSubmit' type='submit' value='Sign in' />
+				<div className='field'>
+					<input className='button is-dark is-rounded is-pulled-right formSubmit' type='submit' value='Sign in' />
 				</div>
 			</form>
 		</div>
@@ -68,16 +68,38 @@ const LoginWindow = (props) => {
 
 const SignupWindow = (props) => {
 	return (
-		<form id='signupForm' name='signupForm' onSubmit={handleSignup} action='/signup' method='POST' className='mainForm'>
-			<label htmlFor='username'>Username:</label>
-			<input id='user' type='text' name='username' placeholder='username' />
-			<label htmlFor='pass'>Password: </label>
-			<input id='pass' type='password' name='pass' placeholder='password' />
-			<label htmlFor='pass2'>Password: </label>
-			<input id='pass2' type='password' name='pass2' placeholder='retype password' />
-			<input type='hidden' name='_csrf' value={props.csrf} />
-			<input className='formSubmit' type='submit' value='Sign Up' />
-		</form>
+		<div className='container is-fluid'>
+			<form id='signupForm' name='signupForm' onSubmit={handleSignup} action='/signup' method='POST' className='form mainForm'>
+				<div className='field'>
+					<label className='label' htmlFor='username'>
+						Username:
+					</label>
+					<div clasName='control'>
+						<input className='input' id='user' type='text' name='username' placeholder='has to be unique! ( ᐛ )و' />
+					</div>
+				</div>
+				<div className='field'>
+					<label className='label' htmlFor='pass'>
+						New password:
+					</label>
+					<div className='control'>
+						<input className='input' id='pass' type='password' name='pass' placeholder='something secretive (⊙…⊙ )' />
+					</div>
+				</div>
+				<div className='field'>
+					<label className='label' htmlFor='pass2'>
+						Retype your password:
+					</label>
+					<div className='control'>
+						<input className='input' id='pass2' type='password' name='pass2' placeholder='type it again (⊙…⊙ )' />
+					</div>
+					<input type='hidden' name='_csrf' value={props.csrf} />
+				</div>
+				<div className='field'>
+					<input className='button is-dark is-rounded formSubmit is-pulled-right' type='submit' value='Sign Up' />
+				</div>
+			</form>
+		</div>
 	);
 };
 

@@ -8,30 +8,28 @@ let MessageModel = {};
 const convertID = mongoose.Types.ObjectId;
 
 const MessageSchema = new mongoose.Schema({
-	message: {
-		type: String,
-		required: true,
-	},
-	owner: {
-		type: String,
-		required: true,
-	},
-	createdDate: {
-		type: Date,
-		default: Date.now,
-	},
+  message: {
+    type: String,
+    required: true,
+  },
+  owner: {
+    type: String,
+    required: true,
+  },
+  createdDate: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 MessageSchema.statics.toAPI = (doc) => ({
-	message: doc.message,
+  message: doc.message,
 });
 
 // maybe have a function where it will save all the chat from
 // before and paste it here but dont know how I would implement it
 
-MessageSchema.statics.findAllMessage = (callback) => {
-	return MessageModel.find().select().lean().exec(callback);
-};
+MessageSchema.statics.findAllMessage = (callback) => MessageModel.find().select().lean().exec(callback);
 
 MessageModel = mongoose.model('message', MessageSchema);
 
