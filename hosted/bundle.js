@@ -182,7 +182,7 @@ var loadMessage = function loadMessage() {
   setInterval(function () {
     console.log('doing it');
     loadMessage();
-  }, 10000);
+  }, 30000);
 };
 
 var handlePassword = function handlePassword(e) {
